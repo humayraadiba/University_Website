@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>University Posts - CU Style</title>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+
+<header class="site-header">
+  <img src="{% static 'images/cu_logo.png' %}" alt="CU Logo" class="logo">
+  <h1>University of Chittagong</h1>
+</header>
+
+<div class="banner">
+  <img class="slide" src="{% static 'images/banner_1.jpg' %}" alt="">
+  <img class="slide" src="{% static 'images/banner_2.jpg' %}" alt="">
+  <img class="slide" src="{% static 'images/banner_3.jpg' %}" alt="">
+  <img class="slide" src="{% static 'images/banner_4.jpg' %}" alt="">
+  <img class="slide" src="{% static 'images/banner_5.jpg' %}" alt="">
+  <img class="slide" src="{% static 'images/banner_6.jpg' %}" alt="">
+</div>
+
+<main class="main-grid">
+  <section class="notices">
+    <h2>Latest University Updates</h2>
+    {% for post in posts %}
+    <div class="notice">
+      <h3>{{ post.title }}</h3>
+      <p>{{ post.content|truncatechars:150 }}</p>
+      <small>{{ post.created_at|date:"F j, Y" }}</small>
+    </div>
+    {% empty %}
+    <p>No updates available.</p>
+    {% endfor %}
+  </section>
+
+  <aside class="quick-links">
+    <h2>Quick Links</h2>
+    <ul>
+      <li><a href="#">Admission Notice</a></li>
+      <li><a href="#">Exam Routine</a></li>
+      <li><a href="#">Library Info</a></li>
+      <li><a href="#">Student Portal</a></li>
+    </ul>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  &copy; 2025 University of Chittagong. All rights reserved.
+</footer>
+
+<script>
+ let slideIndex = 0;
+ function showSlides(){
+   const slides = document.querySelectorAll(".slide");
+   slides.forEach(s => s.style.display = "none");
+   slideIndex = (slideIndex + 1) % slides.length;
+   slides[slideIndex].style.display = "block";
+   setTimeout(showSlides, 4000);
+ }
+ showSlides();
+</script>
+
+</body>
+</html>
